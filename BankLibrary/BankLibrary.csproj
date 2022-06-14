@@ -51,6 +51,7 @@
     <Compile Include="Services\HashService.cs" />
     <Compile Include="Services\LoginService.cs" />
     <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Services\TransferServices.cs" />
     <Compile Include="Services\ValidationCheck.cs" />
   </ItemGroup>
   <ItemGroup />

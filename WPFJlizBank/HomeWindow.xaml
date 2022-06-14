@@ -78,7 +78,7 @@
                         </StackPanel>
                      </Button>
                     
-                    <Button  Margin="15" Grid.Row="0" Grid.Column="2">
+                    <Button  Margin="15" Grid.Row="0" Grid.Column="2" Click="Transfer_Click">
                         <StackPanel>
                             <Image Source="/Images/transfer.png"></Image>
                             <TextBlock Text="轉帳" TextWrapping="Wrap"></TextBlock>

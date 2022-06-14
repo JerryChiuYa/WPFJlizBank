@@ -87,11 +87,11 @@ namespace BankLibrary.Services
                 return data;
         }
 
-        public ObservableCollection<BankPersonalInfo> GetCurrentAccountInfo(string LoginAccount)
+        public BankPersonalInfo GetCurrentAccountInfo(string LoginAccount)
         {
             using (var conn=new SqlConnection(_dbConnStr))
             {
-                var data=new ObservableCollection<BankPersonalInfo>();
+                var personalInfo = new BankPersonalInfo();
                 var cmd = new SqlCommand();
                 cmd.Connection = conn;
                 cmd.CommandText = @"select bank.AccountNum, bank.CustomerId, bank.BankId, bank.BankName, bank.LoginAccount, bank.HashPassword, 
@@ -108,7 +108,6 @@ namespace BankLibrary.Services
 
                 while (dr.Read())
                 {
-                    var personalInfo = new BankPersonalInfo();
                     personalInfo.CustomerId = Guid.Parse(dr["CustomerId"].ToString());
                     personalInfo.UserName = dr["UserName"].ToString();
                     personalInfo.Phone = dr["Phone"].ToString();
@@ -139,9 +138,9 @@ namespace BankLibrary.Services
                         InitDate = DateTime.Parse(dr["bank_init"].ToString()),
                         ModifyDate = !string.IsNullOrEmpty(dr["bank_modify"].ToString()) ? DateTime.Parse(dr["bank_modify"].ToString()) : (DateTime?)null
                     });
-                    data.Add(personalInfo);
+                    
                 }
-                return data;
+                return personalInfo;
             }
             
         }

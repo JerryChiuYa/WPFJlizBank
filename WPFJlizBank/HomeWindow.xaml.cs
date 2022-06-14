@@ -23,8 +23,8 @@ namespace WPFJlizBank
     public partial class HomeWindow : Window
     {
         private ObservableCollection<BankPersonalInfo> _allAccounts;
-        private ObservableCollection<BankPersonalInfo> _currentAccount;
-        public HomeWindow(ObservableCollection<BankPersonalInfo> allAccounts, ObservableCollection<BankPersonalInfo> currentAccount)
+        private BankPersonalInfo _currentAccount;
+        public HomeWindow(ObservableCollection<BankPersonalInfo> allAccounts, BankPersonalInfo currentAccount)
         {
             InitializeComponent();
             _allAccounts = allAccounts;
@@ -46,8 +46,14 @@ namespace WPFJlizBank
 
         private void Balance_Click(object sender, RoutedEventArgs e)
         {
-            var balanceWin=new BalanceWindow(_currentAccount);
+            var balanceWin = new BalanceWindow(_currentAccount);
             balanceWin.ShowDialog();
+        }
+
+        private void Transfer_Click(object sender, RoutedEventArgs e)
+        {
+            var tranWindow = new TransferMoneyWindow(_currentAccount);
+            tranWindow.ShowDialog();
         }
     }
 }

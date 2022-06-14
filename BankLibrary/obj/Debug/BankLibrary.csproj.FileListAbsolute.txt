@@ -4,3 +4,9 @@ C:\Users\User\source\repos\WPFJlizBank\BankLibrary\bin\Debug\BankLibrary.dll
 C:\Users\User\source\repos\WPFJlizBank\BankLibrary\bin\Debug\BankLibrary.pdb
 C:\Users\User\source\repos\WPFJlizBank\BankLibrary\obj\Debug\BankLibrary.dll
 C:\Users\User\source\repos\WPFJlizBank\BankLibrary\obj\Debug\BankLibrary.pdb
+C:\Users\jerry\source\repos\WPFJlizBank\BankLibrary\bin\Debug\BankLibrary.dll
+C:\Users\jerry\source\repos\WPFJlizBank\BankLibrary\bin\Debug\BankLibrary.pdb
+C:\Users\jerry\source\repos\WPFJlizBank\BankLibrary\obj\Debug\BankLibrary.csproj.AssemblyReference.cache
+C:\Users\jerry\source\repos\WPFJlizBank\BankLibrary\obj\Debug\BankLibrary.csproj.CoreCompileInputs.cache
+C:\Users\jerry\source\repos\WPFJlizBank\BankLibrary\obj\Debug\BankLibrary.dll
+C:\Users\jerry\source\repos\WPFJlizBank\BankLibrary\obj\Debug\BankLibrary.pdb

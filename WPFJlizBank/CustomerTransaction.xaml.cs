@@ -23,9 +23,9 @@ namespace WPFJlizBank
     /// </summary>
     public partial class CustomerTransactionWindow : Window
     {
-        private ObservableCollection<BankPersonalInfo> _currentAccount { get; set; }
+        private BankPersonalInfo _currentAccount { get; set; }
         public string _dbConnStr = ConfigurationManager.ConnectionStrings["JlizBank"].ConnectionString;
-        public CustomerTransactionWindow(ObservableCollection<BankPersonalInfo> currentAccount)
+        public CustomerTransactionWindow(BankPersonalInfo currentAccount)
         {
             InitializeComponent();
             _currentAccount = currentAccount;
@@ -38,21 +38,19 @@ namespace WPFJlizBank
             if ( !start.HasValue || !end.HasValue || start > end )
             {
                 ErrorMsg.Text = $"開始時間需小於結束時間, 且不得為空!";
+                ShowTime.Text = "";
                 return;
             }
             var startTime=DateTime.Parse(start.ToString()).ToShortDateString();
             var endTime = DateTime.Parse(end.ToString()).ToShortDateString();
 
-            foreach (var item in _currentAccount)
+            foreach (var item in _currentAccount.bankInfoList)
             {
-                foreach (var item2 in item.bankInfoList)
-                {
-                    TransactionList.ItemsSource = item2.GetTransactionList(DateTime.Parse(start.ToString()), DateTime.Parse(end.ToString()));
-                }
-                
+                    TransactionList.ItemsSource = item.GetTransactionList(DateTime.Parse(start.ToString()), DateTime.Parse(end.ToString()));
             }
 
             ShowTime.Text = $"查詢期間為 {startTime} ~ {endTime}";
+            ErrorMsg.Text = "";
         }
     }
 }
