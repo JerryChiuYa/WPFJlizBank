@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\App.xaml
-13978207015
+14-138578987
 
-162052391650
+17-1731873116
 22544064275
-Animations.xaml;CustomerPersonalWindow.xaml;CustomerTransaction.xaml;CustomerWindow.xaml;ForgetPassword.xaml;ForgetPasswordPage3.xaml;ForgetPasswordPage2.xaml;ForgetPasswordPage1.xaml;LoginWindow.xaml;Register.xaml;HomeWindow.xaml;MainWindow.xaml;SettingsWindow.xaml;
+Animations.xaml;BalanceWindow.xaml;CustomerPersonalWindow.xaml;CustomerTransaction.xaml;CustomerWindow.xaml;ForgetPassword.xaml;ForgetPasswordPage3.xaml;ForgetPasswordPage2.xaml;ForgetPasswordPage1.xaml;LoginWindow.xaml;Register.xaml;HomeWindow.xaml;MainWindow.xaml;SettingsWindow.xaml;
 
 False
 

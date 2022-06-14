@@ -16,14 +16,19 @@
             <Setter Property="FontFamily" Value="微軟正黑體"></Setter>
             <Setter Property="Width" Value="120"></Setter>
             <Setter Property="Height" Value="120"></Setter>
-            <Setter Property="Background" Value="#FAFAFA"></Setter>
+            <Setter Property="Background" Value="#00FFFF"></Setter>
             <Setter Property="BorderBrush" Value="#919191"></Setter>
-            <Setter Property="BorderThickness" Value="2.5"></Setter>
+            <Setter Property="BorderThickness" Value="2,2,4, 5"></Setter>
+
             <Style.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="20"></Setter>
                 </Style>
             </Style.Resources>
+
+            <Style.Triggers>
+                <Trigger Property="Background" Value="#00CACA"></Trigger>
+            </Style.Triggers>
         </Style>
         
         <Style TargetType="TextBlock">
@@ -54,7 +59,7 @@
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button  Margin="15" Grid.Row="0" Grid.Column="0">
+                    <Button  Margin="15" Grid.Row="0" Grid.Column="0" Click="Balance_Click">
                         <StackPanel>
                             <Image Source="Images/money.png" ></Image>
                             <TextBlock Text="存款餘額" TextWrapping="Wrap"></TextBlock>

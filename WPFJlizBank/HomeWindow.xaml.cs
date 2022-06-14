@@ -43,5 +43,11 @@ namespace WPFJlizBank
             tranWindow.ShowDialog();
 
         }
+
+        private void Balance_Click(object sender, RoutedEventArgs e)
+        {
+            var balanceWin=new BalanceWindow(_currentAccount);
+            balanceWin.ShowDialog();
+        }
     }
 }

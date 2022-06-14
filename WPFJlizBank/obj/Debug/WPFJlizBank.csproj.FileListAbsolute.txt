@@ -49,3 +49,5 @@ C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\ForgetPasswordPage2
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\ForgetPasswordPage2.baml
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\ForgetPasswordPage3.g.cs
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\ForgetPasswordPage3.baml
+C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\BalanceWindow.g.cs
+C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\BalanceWindow.baml

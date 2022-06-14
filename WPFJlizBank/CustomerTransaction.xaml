@@ -45,28 +45,33 @@
         <Style TargetType="GridViewColumnHeader">
             <Setter Property="FontSize" Value="15"></Setter>
             <Setter Property="FontFamily" Value="微軟正黑體"></Setter>
+            <Setter Property="Background" Value="#02DF82"></Setter>
         </Style>
         
     </Window.Resources>
-    <Grid>
+    <Grid Background="#CAFFFF">
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Margin="10" Orientation="Horizontal"  VerticalAlignment="Top" Grid.Row="0">
+        <StackPanel>
+            <TextBlock Text="交易紀錄查詢" FontSize="30" HorizontalAlignment="Center" Margin="0 10" FontWeight="ExtraBlack" Foreground="#006030"></TextBlock>
+        </StackPanel>
+        <StackPanel Margin="10" Orientation="Horizontal"  VerticalAlignment="Top" Grid.Row="1">
             <TextBlock Text="開始日期" Style="{StaticResource seTime}"></TextBlock>
             <DatePicker Name="sDate"></DatePicker>
             <TextBlock Text="結束日期" Style="{StaticResource seTime}"></TextBlock>
             <DatePicker Name="eDate"></DatePicker>
             <Button  Content="確定" Margin="5" Name="QueryTransaction" Click="QueryTransaction_Click" Style="{StaticResource queryBtn}"></Button>
         </StackPanel>
-        <StackPanel Margin="5" Orientation="Vertical" Grid.Row="1">
+        <StackPanel Margin="5" Orientation="Vertical" Grid.Row="2">
             <TextBlock Name="ErrorMsg" Margin="10,5,5,5" Foreground="Red" FontSize="15"></TextBlock>
             <TextBlock Name="ShowTime" Margin="10,5,5,5"  FontSize="15"></TextBlock>
         </StackPanel>
-        <ScrollViewer Margin="20" Grid.Row="2">
-            <ListView x:Name="TransactionList">
+        <ScrollViewer Margin="20" Grid.Row="4">
+            <ListView x:Name="TransactionList" Background="#C1FFE4">
                 <ListView.View>
                     <GridView>
 
