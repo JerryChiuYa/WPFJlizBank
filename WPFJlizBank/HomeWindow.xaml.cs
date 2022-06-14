@@ -1,6 +1,7 @@
 ﻿using BankLibrary.BankEntity;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -21,9 +22,13 @@ namespace WPFJlizBank
     /// </summary>
     public partial class HomeWindow : Window
     {
-        public HomeWindow()
+        private ObservableCollection<BankPersonalInfo> _allAccounts;
+        private ObservableCollection<BankPersonalInfo> _currentAccount;
+        public HomeWindow(ObservableCollection<BankPersonalInfo> allAccounts, ObservableCollection<BankPersonalInfo> currentAccount)
         {
             InitializeComponent();
+            _allAccounts = allAccounts;
+            _currentAccount = currentAccount;
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
@@ -34,8 +39,8 @@ namespace WPFJlizBank
 
         private void Transaction_Click(object sender, RoutedEventArgs e)
         {
-            BankAccount account=new BankAccount();
-            var tranWindow = new CustomerTransactionWindow(account);
+            var tranWindow = new CustomerTransactionWindow(_currentAccount);
+            tranWindow.ShowDialog();
 
         }
     }

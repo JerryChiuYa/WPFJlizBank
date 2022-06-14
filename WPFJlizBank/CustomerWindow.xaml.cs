@@ -33,9 +33,9 @@ namespace WPFJlizBank
 
         private void GetCustomerData()
         {
-            CustomerServices services = new CustomerServices(_dbConnStr);
-            var data=services.GetPersonalInfo();
-            CustomerInfoList.ItemsSource = data;
+            //CustomerServices services = new CustomerServices(_dbConnStr);
+            //var data=services.GetPersonalInfo();
+            //CustomerInfoList.ItemsSource = data;
         }
 
         private void CustomerInfoList_SelectionChanged(object sender, SelectionChangedEventArgs e)

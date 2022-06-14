@@ -33,9 +33,9 @@ namespace WPFJlizBank
         {
             if (BankInfoList.SelectedItem!=null)
             {
-                var personalAccount=(BankAccount)BankInfoList.SelectedItem;
-                var tranWindow = new CustomerTransactionWindow(personalAccount);
-                tranWindow.ShowDialog();
+                //var personalAccount=(BankAccount)BankInfoList.SelectedItem;
+                //var tranWindow = new CustomerTransactionWindow(personalAccount);
+                //tranWindow.ShowDialog();
             }
             
         }

@@ -41,8 +41,6 @@ C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\Animations.baml
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\App.baml
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\LoginWindow.g.cs
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\LoginWindow.baml
-C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\bin\Debug\WPFCustomMessageBox.dll
-C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\bin\Debug\WPFCustomMessageBox.xml
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\ForgetPassword.g.cs
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\ForgetPasswordPage1.g.cs
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\ForgetPassword.baml

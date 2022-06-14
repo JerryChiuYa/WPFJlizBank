@@ -38,7 +38,9 @@ namespace WPFJlizBank
 
             if (result)
             {
-                var homeWindow = new HomeWindow();
+                var allAccounts = new CustomerServices(_dbConnStr).GetAllAccountsInfo(this.userName.Text);
+                var currentAccount = new CustomerServices(_dbConnStr).GetCurrentAccountInfo(this.userName.Text);
+                var homeWindow = new HomeWindow(allAccounts, currentAccount);
                 homeWindow.Show();
                 this.Close();
             }

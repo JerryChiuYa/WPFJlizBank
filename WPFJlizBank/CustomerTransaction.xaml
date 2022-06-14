@@ -5,40 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFJlizBank"
         mc:Ignorable="d"
-        Title="CustomerTransactionWindow" Height="450" Width="800"
+        Title="CustomerTransactionWindow" Height="500" Width="800"  MinHeight="500" MinWidth="800"
         WindowStartupLocation="CenterScreen"
         >
+
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="seTime">
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontWeight" Value="ExtraBlack"></Setter>
+            <Setter Property="Foreground" Value="#009393"></Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="queryBtn">
+            <Setter Property="Width" Value="90"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
+            <Setter Property="Foreground" Value="#E8FFF5"></Setter>
+            <Setter Property="Background" Value="#01B468"></Setter>
+            <Setter Property="FontWeight" Value="Black"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="BorderBrush" Value="#01814A"></Setter>
+            <Setter Property="BorderThickness" Value="0,0,2,3"></Setter>
+
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="7"></Setter>
+                    <Setter Property="BorderThickness" Value="10"></Setter>
+                </Style>
+            </Style.Resources>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#005AB5"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="FontFamily" Value="微軟正黑體"></Setter>
+        </Style>
+        
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Margin="10" Orientation="Horizontal"  VerticalAlignment="Top" Grid.Row="0">
-            <TextBlock Text="開始日期" Margin="5"></TextBlock>
+            <TextBlock Text="開始日期" Style="{StaticResource seTime}"></TextBlock>
             <DatePicker Name="sDate"></DatePicker>
-            <TextBlock Text="結束日期" Margin="5"></TextBlock>
+            <TextBlock Text="結束日期" Style="{StaticResource seTime}"></TextBlock>
             <DatePicker Name="eDate"></DatePicker>
-            <Button  Content="確定" Margin="5" Name="QueryTransaction" Click="QueryTransaction_Click"></Button>
+            <Button  Content="確定" Margin="5" Name="QueryTransaction" Click="QueryTransaction_Click" Style="{StaticResource queryBtn}"></Button>
         </StackPanel>
-        <StackPanel Margin="5" Orientation="Horizontal"  Grid.Row="1">
-            <TextBlock Name="ShowTime" Margin="10,5,5,5"></TextBlock>
+        <StackPanel Margin="5" Orientation="Vertical" Grid.Row="1">
+            <TextBlock Name="ErrorMsg" Margin="10,5,5,5" Foreground="Red" FontSize="15"></TextBlock>
+            <TextBlock Name="ShowTime" Margin="10,5,5,5"  FontSize="15"></TextBlock>
         </StackPanel>
         <ScrollViewer Margin="20" Grid.Row="2">
             <ListView x:Name="TransactionList">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="交易紀錄代碼" Width="Auto" DisplayMemberBinding="{Binding Path=TransactionNum}"></GridViewColumn>
+
                         <GridViewColumn Header="交易時間" Width="Auto" DisplayMemberBinding="{Binding Path=TransactionTime}"></GridViewColumn>
-                        <GridViewColumn Header="銀行帳號" Width="Auto" DisplayMemberBinding="{Binding Path=AccountNum}"></GridViewColumn>
-                        <GridViewColumn Header="本行代碼" Width="Auto" DisplayMemberBinding="{Binding Path=FromBankId}"></GridViewColumn>
-                        <GridViewColumn Header="本行名稱" Width="Auto" DisplayMemberBinding="{Binding Path=FromBankName}"></GridViewColumn>
+                        <GridViewColumn Header="轉出銀行名稱" Width="Auto" DisplayMemberBinding="{Binding Path=FromBankName}"></GridViewColumn>
+                        <GridViewColumn Header="轉出帳號" Width="Auto" DisplayMemberBinding="{Binding Path=FromAccountNum}"></GridViewColumn>
+                        <GridViewColumn Header="轉入銀行名稱" Width="Auto" DisplayMemberBinding="{Binding Path=ToBankName}"></GridViewColumn>
+                        <GridViewColumn Header="轉入帳號" Width="Auto" DisplayMemberBinding="{Binding Path=ToAccountNum}"></GridViewColumn>
                         <GridViewColumn Header="交易類型" Width="Auto" DisplayMemberBinding="{Binding Path=TransactionType}"></GridViewColumn>
                         <GridViewColumn Header="交易金額" Width="Auto" DisplayMemberBinding="{Binding Path=TransactionMoney}"></GridViewColumn>
                         <GridViewColumn Header="他行代碼" Width="Auto" DisplayMemberBinding="{Binding Path=ToBankId}"></GridViewColumn>
                         <GridViewColumn Header="他行名稱" Width="Auto" DisplayMemberBinding="{Binding Path=ToBankName}"></GridViewColumn>
                         <GridViewColumn Header="手續費" Width="Auto" DisplayMemberBinding="{Binding Path=HandlingFees}"></GridViewColumn>
                         <GridViewColumn Header="帳戶餘額" Width="Auto" DisplayMemberBinding="{Binding Path=AccountBalance}"></GridViewColumn>
+                        <GridViewColumn Header="交易註明" Width="Auto" DisplayMemberBinding="{Binding Path=Remark}"></GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

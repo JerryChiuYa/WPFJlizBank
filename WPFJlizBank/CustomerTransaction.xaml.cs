@@ -1,6 +1,8 @@
 ﻿using BankLibrary.BankEntity;
+using BankLibrary.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Linq;
 using System.Text;
@@ -21,21 +23,36 @@ namespace WPFJlizBank
     /// </summary>
     public partial class CustomerTransactionWindow : Window
     {
-        private BankAccount personalAccount { get; set; }
+        private ObservableCollection<BankPersonalInfo> _currentAccount { get; set; }
         public string _dbConnStr = ConfigurationManager.ConnectionStrings["JlizBank"].ConnectionString;
-        public CustomerTransactionWindow(BankAccount personalAccount)
+        public CustomerTransactionWindow(ObservableCollection<BankPersonalInfo> currentAccount)
         {
             InitializeComponent();
-            this.personalAccount = personalAccount;
+            _currentAccount = currentAccount;
         }
 
         private void QueryTransaction_Click(object sender, RoutedEventArgs e)
         {
-            var start = sDate.SelectedDate.Value.Date;
-            var end=eDate.SelectedDate.Value.Date;
-            TransactionList.ItemsSource = personalAccount.GetTransactionList(start, end);
+            var start = sDate.SelectedDate;
+            var end = eDate.SelectedDate;
+            if ( !start.HasValue || !end.HasValue || start > end )
+            {
+                ErrorMsg.Text = $"開始時間需小於結束時間, 且不得為空!";
+                return;
+            }
+            var startTime=DateTime.Parse(start.ToString()).ToShortDateString();
+            var endTime = DateTime.Parse(end.ToString()).ToShortDateString();
 
-            ShowTime.Text = $"查詢期間為 {start.ToShortDateString()} ~ {end.ToShortDateString()}";
+            foreach (var item in _currentAccount)
+            {
+                foreach (var item2 in item.bankInfoList)
+                {
+                    TransactionList.ItemsSource = item2.GetTransactionList(DateTime.Parse(start.ToString()), DateTime.Parse(end.ToString()));
+                }
+                
+            }
+
+            ShowTime.Text = $"查詢期間為 {startTime} ~ {endTime}";
         }
     }
 }

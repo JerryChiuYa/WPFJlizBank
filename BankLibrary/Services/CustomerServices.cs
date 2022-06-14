@@ -17,7 +17,7 @@ namespace BankLibrary.Services
         {
             _dbConnStr = dbConnStr;
         }
-        public ObservableCollection<BankPersonalInfo> GetPersonalInfo()
+        public ObservableCollection<BankPersonalInfo> GetAllAccountsInfo(string LoginAccount)
         {
             var data=new ObservableCollection<BankPersonalInfo>();
 
@@ -25,10 +25,19 @@ namespace BankLibrary.Services
             {
                 var cmd = new SqlCommand();
                 cmd.Connection = conn;
-                cmd.CommandText = @"select info.CustomerId, info.UserName, info.Phone, info.Mobile, info.Address, info.Email, info.InitDate, info.ModifyDate, bankinfo.AccountNum,
-                                                        bankinfo.BankId, bankinfo.BankName, bankinfo.LoginAccount, bankinfo.HashPassword, bankinfo.AccountBalance, bankinfo.AllertAccount
-                                                        from BankPersonalInfo as info
-                                                        join BankAccount as bankinfo on info.CustomerId = bankinfo.CustomerId";
+                cmd.CommandText = @"select bank.AccountNum, bank.CustomerId, bank.BankId, bank.BankName, bank.LoginAccount, bank.HashPassword, 
+                                                                bank.AccountBalance, bank.AllertAccount, bank.InitDate as bank_init, bank.ModifyDate as bank_modify,
+                                                                info.IdentityNum, info.UserName, info.Birthday, info.Phone, info.Mobile, info.Address, info.Email, 
+                                                                info.InitDate as info_init, info.ModifyDate as info_modify
+                                                                from BankAccount  as bank
+                                                                join BankPersonalInfo info on bank.CustomerId=info.CustomerId
+                                                                where bank.CustomerId=
+                                                                (
+                                                                    select bank.CustomerId
+                                                                    from BankAccount as bank
+                                                                    where LoginAccount=@LoginAccount
+                                                                )";
+                cmd.Parameters.AddWithValue("@LoginAccount",LoginAccount);
                 cmd.Connection.Open();
                 var dr = cmd.ExecuteReader();
 
@@ -36,28 +45,30 @@ namespace BankLibrary.Services
                 while (dr.Read())
                 {
             
-                    var customer = data.FirstOrDefault(c => c.CustomerId == Guid.Parse(dr["CustomerId"].ToString()));
-                    if (customer == null)
+                    var personalInfo = data.FirstOrDefault(c => c.CustomerId == Guid.Parse(dr["CustomerId"].ToString()));
+                    if (personalInfo == null)
                     {
-                        customer = new BankPersonalInfo();
-                        customer.CustomerId = Guid.Parse(dr["CustomerId"].ToString());
-                        customer.UserName = dr["UserName"].ToString();
-                        customer.Phone = dr["Phone"].ToString();
-                        customer.Mobile = dr["Mobile"].ToString();
-                        customer.Address = dr["Address"].ToString();
-                        customer.Email = dr["Email"].ToString();
-                        customer.InitDate = DateTime.Parse(dr["InitDate"].ToString());
-                        if (!string.IsNullOrEmpty(dr["ModifyDate"].ToString()))
+                        personalInfo = new BankPersonalInfo();
+                        personalInfo.CustomerId = Guid.Parse(dr["CustomerId"].ToString());
+                        personalInfo.UserName = dr["UserName"].ToString();
+                        personalInfo.Phone = dr["Phone"].ToString();
+                        personalInfo.IdentityNum = dr["IdentityNum"].ToString();
+                        personalInfo.Birthday = DateTime.Parse(dr["Birthday"].ToString());
+                        personalInfo.Mobile = dr["Mobile"].ToString();
+                        personalInfo.Address = dr["Address"].ToString();
+                        personalInfo.Email = dr["Email"].ToString();
+                        personalInfo.InitDate = DateTime.Parse(dr["info_init"].ToString());
+                        if (!string.IsNullOrEmpty(dr["info_modify"].ToString()))
                         {
-                            customer.ModifyDate = DateTime.Parse(dr["ModifyDate"].ToString());
+                            personalInfo.ModifyDate = DateTime.Parse(dr["bank_modify"].ToString());
                         }
-                        data.Add(customer);
+
                     }
-                    if (customer.bankInfoList==null)
+                    if (personalInfo.bankInfoList==null)
                     {
-                        customer.bankInfoList = new ObservableCollection<BankAccount>();
+                        personalInfo.bankInfoList = new ObservableCollection<BankAccount>();
                     }
-                    customer.bankInfoList.Add(new BankAccount()
+                    personalInfo.bankInfoList.Add(new BankAccount()
                     {
                         AccountNum = dr["AccountNum"].ToString(),
                         AllertAccount  = bool.Parse(dr["AllertAccount"].ToString()),
@@ -67,17 +78,72 @@ namespace BankLibrary.Services
                         CustomerId = Guid.Parse(dr["CustomerId"].ToString()),
                         HashPassword = dr["HashPassword"].ToString(),
                         LoginAccount = dr["LoginAccount"].ToString(),
-                    }); 
-
+                        InitDate = DateTime.Parse(dr["bank_init"].ToString()),
+                        ModifyDate = !string.IsNullOrEmpty(dr["bank_modify"].ToString()) ? DateTime.Parse(dr["bank_modify"].ToString()) : (DateTime?)null          
+                });
+                    data.Add(personalInfo);
                 }
             }
                 return data;
         }
 
-        public ObservableCollection<BankPersonalInfo> GetFilterCustomerInfo(string IdentityNum, string UserName)
+        public ObservableCollection<BankPersonalInfo> GetCurrentAccountInfo(string LoginAccount)
         {
-            var data = new ObservableCollection<BankPersonalInfo>();
-            return data;
+            using (var conn=new SqlConnection(_dbConnStr))
+            {
+                var data=new ObservableCollection<BankPersonalInfo>();
+                var cmd = new SqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = @"select bank.AccountNum, bank.CustomerId, bank.BankId, bank.BankName, bank.LoginAccount, bank.HashPassword, 
+                                                                bank.AccountBalance, bank.AllertAccount, bank.InitDate as bank_init, bank.ModifyDate as bank_modify,
+                                                                info.IdentityNum, info.UserName, info.Birthday, info.Phone, info.Mobile, info.Address, info.Email, 
+                                                                info.InitDate as info_init, info.ModifyDate as info_modify
+                                                                from BankAccount  as bank
+                                                                join BankPersonalInfo info on bank.CustomerId = info.CustomerId 
+                                                                where LoginAccount=@LoginAccount";
+
+                cmd.Parameters.AddWithValue("@LoginAccount", LoginAccount);
+                cmd.Connection.Open();
+                var dr=cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    var personalInfo = new BankPersonalInfo();
+                    personalInfo.CustomerId = Guid.Parse(dr["CustomerId"].ToString());
+                    personalInfo.UserName = dr["UserName"].ToString();
+                    personalInfo.Phone = dr["Phone"].ToString();
+                    personalInfo.IdentityNum = dr["IdentityNum"].ToString();
+                    personalInfo.Birthday = DateTime.Parse(dr["Birthday"].ToString());
+                    personalInfo.Mobile = dr["Mobile"].ToString();
+                    personalInfo.Address = dr["Address"].ToString();
+                    personalInfo.Email = dr["Email"].ToString();
+                    personalInfo.InitDate = DateTime.Parse(dr["info_init"].ToString());
+                    if (!string.IsNullOrEmpty(dr["info_modify"].ToString()))
+                    {
+                        personalInfo.ModifyDate = DateTime.Parse(dr["bank_modify"].ToString());
+                    }
+                    if (personalInfo.bankInfoList == null)
+                    {
+                        personalInfo.bankInfoList = new ObservableCollection<BankAccount>();
+                    }
+                    personalInfo.bankInfoList.Add(new BankAccount()
+                    {
+                        AccountNum = dr["AccountNum"].ToString(),
+                        AllertAccount = bool.Parse(dr["AllertAccount"].ToString()),
+                        BankId = dr["BankId"].ToString(),
+                        AccountBalance = decimal.Parse(dr["AccountBalance"].ToString()),
+                        BankName = dr["BankName"].ToString(),
+                        CustomerId = Guid.Parse(dr["CustomerId"].ToString()),
+                        HashPassword = dr["HashPassword"].ToString(),
+                        LoginAccount = dr["LoginAccount"].ToString(),
+                        InitDate = DateTime.Parse(dr["bank_init"].ToString()),
+                        ModifyDate = !string.IsNullOrEmpty(dr["bank_modify"].ToString()) ? DateTime.Parse(dr["bank_modify"].ToString()) : (DateTime?)null
+                    });
+                    data.Add(personalInfo);
+                }
+                return data;
+            }
+            
         }
 
         public ObservableCollection<TransactionRecordsDetails> GetTransaction(string AccountNum, DateTime start, DateTime end)
@@ -88,7 +154,10 @@ namespace BankLibrary.Services
             {
                 var cmd = new SqlCommand();
                 cmd.Connection = conn;
-                cmd.CommandText = "  select * from TransactionRecordsDetails where ((FromAccountNum=@AccountNum and TransactionType='Transfer') or (ToAccountNum=@AccountNum and TransactionType='Receive')) and TransactionTime>=@start and TransactionTime<=@end";
+                cmd.CommandText = @"select * from TransactionRecordsDetails 
+                                                            where ((FromAccountNum=@AccountNum and TransactionType='Transfer') or (ToAccountNum=@AccountNum and TransactionType='Receive')) 
+                                                            and TransactionTime>=@start and TransactionTime<=@end
+                                                            order by TransactionTime desc";
                 cmd.Parameters.AddWithValue("@AccountNum", AccountNum);
                 cmd.Parameters.AddWithValue("@start", start);
                 cmd.Parameters.AddWithValue("@end", end);
