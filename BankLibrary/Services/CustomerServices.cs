@@ -229,5 +229,27 @@ namespace BankLibrary.Services
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public void AddTransactionDetails(BankAccount bankInfo, decimal TransactionMoney)
+        {
+            if (bankInfo.GetTransactionList().Count != 0)
+            {
+                using (var conn = new SqlConnection(_dbConnStr))
+                {
+                    string insertSql = "insert into B (AccountNum, BankId, BankName, LoginAccount, HashPassword, AllertAccount, InitDate, CustomerId) " +
+                        "values(@AccountNum, @BankId, @BankName, @LoginAccount, @HashPassword, 'False', GETDATE(), @CustomerId)";
+                    var cmd = new SqlCommand(insertSql, conn);
+                    cmd.Parameters.AddWithValue("@AccountNum", bankInfo.AccountNum);
+                    cmd.Parameters.AddWithValue("@BankId", bankInfo.BankId);
+                    cmd.Parameters.AddWithValue("@BankName", bankInfo.BankName);
+                    cmd.Parameters.AddWithValue("@LoginAccount", bankInfo.LoginAccount);
+                    cmd.Parameters.AddWithValue("@HashPassword", bankInfo.HashPassword);
+                    cmd.Parameters.AddWithValue("@CustomerId", personalInfo.CustomerId.ToString().ToUpper());
+                    cmd.Connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+        }
     }
 }

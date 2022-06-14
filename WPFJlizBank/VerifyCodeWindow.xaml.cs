@@ -1,5 +1,4 @@
 ﻿using BankLibrary.BankEntity;
-using BankLibrary.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,28 +16,23 @@ using System.Windows.Shapes;
 namespace WPFJlizBank
 {
     /// <summary>
-    /// TransferMoneyWindow.xaml 的互動邏輯
+    /// VerifyCodeWindow.xaml 的互動邏輯
     /// </summary>
-    public partial class TransferMoneyWindow : Window
+    public partial class VerifyCodeWindow : Window
     {
         private BankPersonalInfo _currentAccount;
+        private string _verifyCode;
 
-        public TransferMoneyWindow(BankPersonalInfo currentAccount)
+        public VerifyCodeWindow(BankPersonalInfo currentAccount, string verifyCode)
         {
             InitializeComponent();
             _currentAccount = currentAccount;
-            foreach (var item in _currentAccount.bankInfoList)
-            {
-                this.YourAccount.DataContext = item;
-            }
-           
-        }
+            _verifyCode = verifyCode;
 
-        private void Transfer_Click(object sender, RoutedEventArgs e)
-        {
-            var verifyCode = GetCodeViaEmail.GetVerifyCode(_currentAccount.Email);
-            var window = new VerifyCodeWindow(_currentAccount, verifyCode);
-            window.ShowDialog();
+            if (this.inputCode.Text== _verifyCode)
+            {
+
+            }
         }
     }
 }

@@ -17,9 +17,14 @@ namespace BankLibrary.Services
             _dbConnStr = dbConnStr;
         }
 
-        public TransactionRecordsDetails TransferMoney()
+        public TransactionRecordsDetails TransferMoney(BankPersonalInfo currentAccount, decimal transferMoney)
         {
-            var result=new TransactionRecordsDetails();
+            var details = new ObservableCollection<TransactionRecordsDetails>();
+            details.Add(new TransactionRecordsDetails
+            {
+
+            });
+
             return result;
         }
     }
