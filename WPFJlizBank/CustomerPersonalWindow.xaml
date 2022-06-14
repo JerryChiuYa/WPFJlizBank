@@ -1,0 +1,28 @@
+﻿<Window x:Class="WPFJlizBank.CustomerPersonalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFJlizBank"
+        mc:Ignorable="d"
+        Title="CustomerPersonalWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Grid>
+        <ScrollViewer>
+            <ListView x:Name="BankInfoList" Margin="10" SelectionChanged="BankInfoList_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="銀行帳號" Width="Auto" DisplayMemberBinding="{Binding Path=AccountNum}"></GridViewColumn>
+                        <GridViewColumn Header="銀行代碼" Width="Auto" DisplayMemberBinding="{Binding Path=BankId}"></GridViewColumn>
+                        <GridViewColumn Header="銀行名稱" Width="Auto" DisplayMemberBinding="{Binding Path=BankName}"></GridViewColumn>
+                        <GridViewColumn Header="登入帳號" Width="Auto" DisplayMemberBinding="{Binding Path=LoginAccount}"></GridViewColumn>
+                        <GridViewColumn Header="Hash密碼" Width="Auto" DisplayMemberBinding="{Binding Path=HashPassword}"></GridViewColumn>
+                        <GridViewColumn Header="帳戶餘額" Width="Auto" DisplayMemberBinding="{Binding Path=AccountBalance}"></GridViewColumn>
+                        <GridViewColumn Header="警示帳戶" Width="Auto" DisplayMemberBinding="{Binding Path=AllertAccount}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
+    </Grid>
+</Window>

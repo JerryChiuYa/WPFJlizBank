@@ -1,0 +1,122 @@
+﻿<Window x:Class="WPFJlizBank.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFJlizBank"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="500" Width="800"  MinHeight="500" MinWidth="800"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="200"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Background"  Value="White"></Setter>
+            <Setter Property="BorderBrush"  Value="#01B468"></Setter>
+            <Setter Property="BorderThickness"  Value="1,1,2,2.5"></Setter>
+
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"></Setter>
+                </Style>
+            </Style.Resources>
+        </Style>
+        
+
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#005757"></Setter>
+            <Setter Property="FontFamily" Value="Calibri"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="90"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Foreground" Value="#E8FFF5"></Setter>
+            <Setter Property="Background" Value="#01B468"></Setter>
+            <Setter Property="FontWeight" Value="Black"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="BorderBrush" Value="#01814A"></Setter>
+            <Setter Property="BorderThickness" Value="0,0,2,3"></Setter>
+
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="7"></Setter>
+                    <Setter Property="BorderThickness" Value="10"></Setter>
+                </Style>
+            </Style.Resources>
+            
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#005AB5"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="BtnRe" TargetType="Button">
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Width" Value="110"></Setter>
+            <Setter Property="Background" Value="#93FF93"></Setter>
+            <Setter Property="BorderThickness" Value="0,0,2,2"></Setter>
+            <Setter Property="BorderBrush" Value="#02C874"></Setter>
+            <Setter Property="FontFamily" Value="微軟正黑體"></Setter>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="6"></Setter>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <!--#ADFEDC"背景綠色-->
+
+        <ControlTemplate x:Key="PwdBox" TargetType="PasswordBox">
+            <Border CornerRadius="5" BorderThickness="1,1,2,2.5" BorderBrush="#01B468" Background="White">
+                <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+            </Border>
+        </ControlTemplate>
+    </Window.Resources>
+    
+    
+    <Grid >
+        <Border>
+
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/report.jpg"  Opacity="0.3"></ImageBrush>
+            </Border.Background>
+            <StackPanel Margin="20">
+                <Border  Width="90" Height="85" CornerRadius="35">
+                    <Border.Background>
+                        <ImageBrush Stretch="Fill"  ImageSource="/Images/user_login.png" ></ImageBrush>
+                    </Border.Background>
+                </Border>
+
+
+                <Label Content="傑力士銀行登入" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" FontFamily="Calibri" Foreground="#005757" Margin="10"></Label>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <Label Content="會員帳號"></Label>
+                    <TextBox  Name="userName"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <Label Content="會員密碼"></Label>
+                    <PasswordBox Width="200" Height="25" Name="password" FontSize="16" Template="{StaticResource PwdBox}"></PasswordBox>
+                </StackPanel>
+                <StackPanel Margin="400,70,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="登入" Click="Login_Click"></Button>
+                    <Button Content="清除" Click="Reset_Click"></Button>
+                    <Button Content="退出" Click="Exit_Click"></Button>
+                </StackPanel>
+                <StackPanel  HorizontalAlignment="Center" Margin="0,0,190,0">
+                    <Button  Margin="5"   Style="{StaticResource BtnRe}" Name="ForgetPwd" Click="ForgetPwd_Click">
+                        <TextBlock Text="忘記密碼?" Foreground="#007979" TextDecorations="Underline" FontFamily="微軟正黑體"></TextBlock>
+                    </Button>
+                    <Button  Margin="5"  Name="Register" Style="{StaticResource BtnRe}" Click="Register_Click">
+                        <TextBlock Text="沒會員?這裡註冊"  FontSize="12" Foreground="#007979" TextDecorations="Underline"  FontFamily="微軟正黑體"></TextBlock>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
