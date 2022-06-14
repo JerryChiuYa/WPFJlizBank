@@ -61,9 +61,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFCustomMessageBox, Version=1.0.7.39267, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WPFCustomMessageBox.1.0.7\lib\WPFCustomMessageBox.dll</HintPath>
-    </Reference>
     <Reference Include="XamlFlair.WPF, Version=1.2.13.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\XamlFlair.WPF.1.2.13\lib\net48\XamlFlair.WPF.dll</HintPath>
     </Reference>

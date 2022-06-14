@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankLibrary.BankEntity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -33,8 +34,8 @@ namespace WPFJlizBank
 
         private void Transaction_Click(object sender, RoutedEventArgs e)
         {
-            User.FindFirstValue
-            var tranWindow = new CustomerTransactionWindow();
+            BankAccount account=new BankAccount();
+            var tranWindow = new CustomerTransactionWindow(account);
 
         }
     }
