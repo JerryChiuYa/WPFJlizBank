@@ -33,14 +33,14 @@ namespace WPFJlizBank
         {
             var modify=new ModifyPersonalInfo(_currentAccount);
             modify.ShowDialog();
-            this.Close();
+         
         }
 
         private void Transaction_Click(object sender, RoutedEventArgs e)
         {
             var tranWindow = new CustomerTransactionWindow(_currentAccount);
             tranWindow.ShowDialog();
-            this.Close();
+     
 
         }
 
@@ -48,14 +48,14 @@ namespace WPFJlizBank
         {
             var balanceWin = new BalanceWindow(_currentAccount);
             balanceWin.ShowDialog();
-            this.Close();
+          
         }
 
         private void Transfer_Click(object sender, RoutedEventArgs e)
         {
             var tranWindow = new TransferMoneyWindow(_currentAccount);
             tranWindow.ShowDialog();
-            this.Close();
+       
         }
     }
 }
