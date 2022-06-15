@@ -111,3 +111,5 @@ C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\VerifyCodeWindow.g.
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\TransactionResult.baml
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\TransferMoneyWindow.baml
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\VerifyCodeWindow.baml
+C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\ModifyPersonalInfo.g.cs
+C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\ModifyPersonalInfo.baml

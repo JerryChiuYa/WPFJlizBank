@@ -10,7 +10,7 @@
     <Window.Resources>
 
         <Style TargetType="Label">
-            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
 
@@ -82,25 +82,25 @@
                 <StackPanel Name="Results" >
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Label Content="您的銀行名稱為:"></Label>
-                        <TextBlock Text="{Binding Path=FromBankName}" Style="{StaticResource infoText}"></TextBlock>
+                        <TextBlock Text="{Binding FromBankName}" Style="{StaticResource infoText}"></TextBlock>
                     </StackPanel>
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Label Content="您的帳戶號碼為:"></Label>
-                        <TextBlock Text="{Binding Path=AccountNum}" Style="{StaticResource infoText}"></TextBlock>
+                        <TextBlock Text="{Binding FromAccountNum}" Style="{StaticResource infoText}"></TextBlock>
                     </StackPanel>
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Label Content="您的新台幣餘額為:"></Label>
-                        <TextBlock Text="{Binding Path=AccountBalance}" Style="{StaticResource infoText}"></TextBlock>
+                        <TextBlock Text="{Binding AccountBalance}" Style="{StaticResource infoText}"></TextBlock>
                     </StackPanel>
 
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Label Content="轉帳銀行為:"></Label>
-                        <TextBlock Name="ToBankName" Style="{StaticResource infoText}"></TextBlock>
+                        <TextBlock Text="{Binding ToBankName}" Style="{StaticResource infoText}"></TextBlock>
                     </StackPanel>
 
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Label Content="轉帳至帳號為:"></Label>
-                        <TextBlock  Name="ToAccountNum" Style="{StaticResource infoText}"></TextBlock>
+                        <TextBlock  Text="{Binding ToAccountNum}" Style="{StaticResource infoText}"></TextBlock>
                     </StackPanel>
 
                     <StackPanel Margin="5" Orientation="Horizontal">

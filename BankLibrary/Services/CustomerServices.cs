@@ -43,75 +43,28 @@ namespace BankLibrary.Services
             }
             return result;
         }
-        //public ObservableCollection<BankPersonalInfo> GetAllAccountsInfo(string LoginAccount)
-        //{
-        //    var data=new ObservableCollection<BankPersonalInfo>();
+        public void UpdatePersonalInfo(BankPersonalInfo personalInfo)
+        {
+            if (personalInfo != null)
+            {
+                using (var conn = new SqlConnection(_dbConnStr))
+                {
+                    string sqlStr = @"update BankPersonalInfo set UserName=@UserName, Phone=@Phone, Mobile=@Mobile,
+                        Email=@Email, Address=@Address, Birthday=@Birthday, ModifyDate=GETDATE() where CustomerId=@CustomerId";
+                    var cmd = new SqlCommand(sqlStr, conn);
+                    cmd.Parameters.AddWithValue("@UserName", personalInfo.UserName);
+                    cmd.Parameters.AddWithValue("@Phone", personalInfo.Phone);
+                    cmd.Parameters.AddWithValue("@Mobile", personalInfo.Mobile);
+                    cmd.Parameters.AddWithValue("@Birthday", personalInfo.Birthday);
+                    cmd.Parameters.AddWithValue("@Email", personalInfo.Email);
+                    cmd.Parameters.AddWithValue("@Address", personalInfo.Address);
+                    cmd.Parameters.AddWithValue("@CustomerId", personalInfo.CustomerId);
 
-        //    using (var conn=new SqlConnection(_dbConnStr))
-        //    {
-        //        var cmd = new SqlCommand();
-        //        cmd.Connection = conn;
-        //        cmd.CommandText = @"select bank.AccountNum, bank.CustomerId, bank.BankId, bank.BankName, bank.LoginAccount, bank.HashPassword, 
-        //                                                        bank.AccountBalance, bank.AllertAccount, bank.InitDate as bank_init, bank.ModifyDate as bank_modify,
-        //                                                        info.IdentityNum, info.UserName, info.Birthday, info.Phone, info.Mobile, info.Address, info.Email, 
-        //                                                        info.InitDate as info_init, info.ModifyDate as info_modify
-        //                                                        from BankAccount  as bank
-        //                                                        join BankPersonalInfo info on bank.CustomerId=info.CustomerId
-        //                                                        where bank.CustomerId=
-        //                                                        (
-        //                                                            select bank.CustomerId
-        //                                                            from BankAccount as bank
-        //                                                            where LoginAccount=@LoginAccount
-        //                                                        )";
-        //        cmd.Parameters.AddWithValue("@LoginAccount",LoginAccount);
-        //        cmd.Connection.Open();
-        //        var dr = cmd.ExecuteReader();
-
-                
-        //        while (dr.Read())
-        //        {
-            
-        //            var personalInfo = data.FirstOrDefault(c => c.CustomerId == Guid.Parse(dr["CustomerId"].ToString()));
-        //            if (personalInfo == null)
-        //            {
-        //                personalInfo = new BankPersonalInfo();
-        //                personalInfo.CustomerId = Guid.Parse(dr["CustomerId"].ToString());
-        //                personalInfo.UserName = dr["UserName"].ToString();
-        //                personalInfo.Phone = dr["Phone"].ToString();
-        //                personalInfo.IdentityNum = dr["IdentityNum"].ToString();
-        //                personalInfo.Birthday = DateTime.Parse(dr["Birthday"].ToString());
-        //                personalInfo.Mobile = dr["Mobile"].ToString();
-        //                personalInfo.Address = dr["Address"].ToString();
-        //                personalInfo.Email = dr["Email"].ToString();
-        //                personalInfo.InitDate = DateTime.Parse(dr["info_init"].ToString());
-        //                if (!string.IsNullOrEmpty(dr["info_modify"].ToString()))
-        //                {
-        //                    personalInfo.ModifyDate = DateTime.Parse(dr["bank_modify"].ToString());
-        //                }
-
-        //            }
-        //            if (personalInfo.bankInfoList==null)
-        //            {
-        //                personalInfo.bankInfoList = new ObservableCollection<BankAccount>();
-        //            }
-        //            personalInfo.bankInfoList.Add(new BankAccount()
-        //            {
-        //                AccountNum = dr["AccountNum"].ToString(),
-        //                AllertAccount  = bool.Parse(dr["AllertAccount"].ToString()),
-        //                BankId = dr["BankId"].ToString(),
-        //                AccountBalance = decimal.Parse(dr["AccountBalance"].ToString()),
-        //                BankName = dr["BankName"].ToString(),
-        //                CustomerId = Guid.Parse(dr["CustomerId"].ToString()),
-        //                HashPassword = dr["HashPassword"].ToString(),
-        //                LoginAccount = dr["LoginAccount"].ToString(),
-        //                InitDate = DateTime.Parse(dr["bank_init"].ToString()),
-        //                ModifyDate = !string.IsNullOrEmpty(dr["bank_modify"].ToString()) ? DateTime.Parse(dr["bank_modify"].ToString()) : (DateTime?)null          
-        //        });
-        //            data.Add(personalInfo);
-        //        }
-        //    }
-        //        return data;
-        //}
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
         public BankPersonalInfo GetCurrentAccountInfo(string LoginAccount)
         {
@@ -332,16 +285,17 @@ namespace BankLibrary.Services
             }
         }
 
-        public void TransferMoneyService(BankAccount bankInfo, TransactionRecordsDetails transaction)
+        public TransactionRecordsDetails TransferMoneyService(BankAccount bankInfo, TransactionRecordsDetails transaction)
         {
             var currentTime = DateTime.Now;
                 using (var conn = new SqlConnection(_dbConnStr))
                 {
                     string insertSql = @"insert into TransactionRecordsDetails (TransactionNum, TransactionTime, FromAccountNum, ToAccountNum, FromBankId, FromBankName, 
                                                             TransactionType, TransactionMoney, ToBankId, ToBankName, HandlingFees, AccountBalance, Remark) 
-                                                            values(@AccountNum, @TransactionTime, @FromAccountNum, @ToAccountNum, @FromBankId, @FromBankName, @TransactionType, @TransactionMoney, 
+                                                            values(@TransactionNum, @TransactionTime, @FromAccountNum, @ToAccountNum, @FromBankId, @FromBankName, @TransactionType, @TransactionMoney, 
                                                             @ToBankId, @ToBankName, @HandlingFees, @AccountBalance, @Remark)";
 
+                
                 //增加付款人紀錄
                     var randNum = Guid.NewGuid();
                     var cmd = new SqlCommand(insertSql, conn);
@@ -385,6 +339,8 @@ namespace BankLibrary.Services
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
 
+                cmd.Connection.Close();
+
                 //增加收款人紀錄
                 var cmd2 = new SqlCommand(insertSql, conn);
                 cmd2.Parameters.AddWithValue("@TransactionNum", randNum);
@@ -404,6 +360,10 @@ namespace BankLibrary.Services
                 cmd2.Connection.Open();
                 cmd2.ExecuteNonQuery();
             }
+            transaction.FromBankName = bankInfo.BankName;
+            transaction.FromAccountNum = bankInfo.AccountNum;
+            transaction.AccountBalance = bankInfo.AccountBalance;
+            return transaction;
         }
 
         public bool UpdateTransferBalance(BankAccount bankinfo, decimal money)

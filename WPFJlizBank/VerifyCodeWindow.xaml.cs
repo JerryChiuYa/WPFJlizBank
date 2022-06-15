@@ -23,26 +23,26 @@ namespace WPFJlizBank
     public partial class VerifyCodeWindow : Window
     {
         private BankPersonalInfo _currentAccount;
-        private TransactionRecordsDetails _transactionRecordsDetails;
+        private TransactionRecordsDetails _shortTransaction;
         private string _verifyCode;
         private string _dbConnStr = ConfigurationManager.ConnectionStrings["JlizBank"].ConnectionString;
         private BankAccount bankinfo;
 
-        public VerifyCodeWindow(BankPersonalInfo currentAccount, TransactionRecordsDetails transactionRecordsDetails, string verifyCode)
+        public VerifyCodeWindow(BankPersonalInfo currentAccount, TransactionRecordsDetails shortTransaction, string verifyCode)
         {
             InitializeComponent();
             _currentAccount = currentAccount;
-            _transactionRecordsDetails = transactionRecordsDetails;
+            _shortTransaction = shortTransaction;
             _verifyCode = verifyCode;
             foreach (var item in _currentAccount.bankInfoList)
             {
                 bankinfo=item;
             }
             this.YourAccount.DataContext = bankinfo;
-            this.ToBankName.Text = transactionRecordsDetails.ToBankName;
-            this.ToAccountNum.Text = transactionRecordsDetails.ToAccountNum;
-            this.Remark.Text = transactionRecordsDetails.Remark;
-            this.TransactionMoney.Text = transactionRecordsDetails.TransactionMoney.ToString();
+            this.ToBankName.Text = _shortTransaction.ToBankName;
+            this.ToAccountNum.Text = _shortTransaction.ToAccountNum;
+            this.Remark.Text = _shortTransaction.Remark;
+            this.TransactionMoney.Text = _shortTransaction.TransactionMoney.ToString();
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
@@ -53,11 +53,18 @@ namespace WPFJlizBank
                 return;
             }
             var services = new CustomerServices(_dbConnStr);
-            services.TransferMoneyService(bankinfo, _transactionRecordsDetails);
-
-            var succuss = new TransactionResult(_currentAccount, _transactionRecordsDetails);
-            succuss.ShowDialog();
+            var transactionDetails=services.TransferMoneyService(bankinfo, _shortTransaction);
             this.Close();
+
+            var succuss = new TransactionResult(_currentAccount, transactionDetails);
+            succuss.ShowDialog();
+
+        }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            new HomeWindow(_currentAccount).ShowDialog();
         }
     }
 }

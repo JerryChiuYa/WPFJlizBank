@@ -33,10 +33,9 @@ namespace WPFJlizBank
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
+            this.Close();
             var home = new HomeWindow(_currentAccount);
             home.ShowDialog();
-            this.Close();
-
         }
     }
 }

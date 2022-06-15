@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFJlizBank"
         xmlns:vc="clr-namespace:BankLibrary.Services;assembly=BankLibrary"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Register" Height="500" Width="800" MinHeight="500" MinWidth="800"
         WindowStartupLocation="CenterScreen"
@@ -31,7 +32,7 @@
 
         <Style TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
             <Setter Property="Foreground" Value="#003E3E"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
             <Setter Property="FontFamily" Value="微軟正黑體"></Setter>
@@ -42,7 +43,7 @@
         <Style TargetType="TextBox">
             <Setter Property="Width" Value="200"></Setter>
             <Setter Property="Height" Value="25"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
             <Setter Property="BorderBrush" Value="#00AEAE"></Setter>
             <Setter Property="BorderThickness" Value="1,1,2,2"></Setter>
             <Style.Resources>
@@ -87,23 +88,40 @@
                         <StackPanel Width="100" Margin="5">
                             <TextBlock Text="姓名"  ></TextBlock>
                         </StackPanel>
-                        <TextBox Text="{Binding Path=UserName}"></TextBox>
+                        <TextBox  Validation.ErrorTemplate="{StaticResource ValidateTemplate}" Validation.Error="Check_Error">
+                            <TextBox.Text>
+                                <Binding Path="UserName" UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules >
+                                        <vc:ValidationCheck CheckType="NameType" ></vc:ValidationCheck>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
 
-                </StackPanel>
+                    </StackPanel>
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <StackPanel Width="100" Margin="5">
                             <TextBlock Text="身分證字號"  ></TextBlock>
                         </StackPanel>
-                    <TextBox  Validation.ErrorTemplate="{StaticResource ValidateTemplate}" CharacterCasing="Upper">
+                    <TextBox  Validation.ErrorTemplate="{StaticResource ValidateTemplate}" CharacterCasing="Upper" x:Name="IdNum" Validation.Error="Check_Error">
                             <TextBox.Text>
-                                <Binding Path="IdentityNum" UpdateSourceTrigger="LostFocus">
-                                    <Binding.ValidationRules>
-                                        <vc:ValidationCheck CheckType="IdentityType"></vc:ValidationCheck>
+                                <Binding Path="IdentityNum" UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules >
+                                        <vc:ValidationCheck CheckType="IdentityType" ></vc:ValidationCheck>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
                     </TextBox>
                 </StackPanel>
+
+                    <StackPanel Margin="5,10,5,5" Orientation="Horizontal">
+                        <StackPanel Width="100" Margin="5">
+                            <TextBlock Text="生日"  ></TextBlock>
+                        </StackPanel>
+                        <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding Birthday}">
+                        </DatePicker>
+                    </StackPanel>
+                
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <StackPanel Width="100" Margin="5">
                             <TextBlock Text="電話" ></TextBlock>
@@ -114,9 +132,9 @@
                         <StackPanel Width="100" Margin="5">
                             <TextBlock Text="手機" ></TextBlock>
                         </StackPanel>
-                        <TextBox  Validation.ErrorTemplate="{StaticResource ValidateTemplate}">
+                        <TextBox  Validation.ErrorTemplate="{StaticResource ValidateTemplate}" Validation.Error="Check_Error">
                             <TextBox.Text>
-                                <Binding Path="Mobile" UpdateSourceTrigger="LostFocus">
+                                <Binding Path="Mobile" UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True" >
                                     <Binding.ValidationRules>
                                         <vc:ValidationCheck CheckType="MobileType"></vc:ValidationCheck>
                                     </Binding.ValidationRules>
@@ -134,9 +152,9 @@
                         <StackPanel Width="100" Margin="5">
                             <TextBlock Text="電子郵件" ></TextBlock>
                         </StackPanel>
-                    <TextBox  Validation.ErrorTemplate="{StaticResource ValidateTemplate}">
+                        <TextBox  Validation.ErrorTemplate="{StaticResource ValidateTemplate}" Validation.Error="Check_Error">
                             <TextBox.Text>
-                                <Binding Path="Email" UpdateSourceTrigger="LostFocus">
+                                <Binding Path="Email" UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
                                     <Binding.ValidationRules>
                                         <vc:ValidationCheck CheckType="EmailType"></vc:ValidationCheck>
                                     </Binding.ValidationRules>
@@ -176,9 +194,9 @@
                         <StackPanel Width="100" Margin="5">
                             <TextBlock Text="登入帳號"></TextBlock>
                         </StackPanel>
-                        <TextBox Validation.ErrorTemplate="{StaticResource ValidateTemplate}">
+                        <TextBox Validation.ErrorTemplate="{StaticResource ValidateTemplate}" Validation.Error="Check_Error" >
                             <TextBox.Text>
-                                <Binding Path="LoginAccount" UpdateSourceTrigger="PropertyChanged">
+                                <Binding Path="LoginAccount" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                                     <Binding.ValidationRules>
                                         <vc:ValidationCheck CheckType="LoginAccountType"></vc:ValidationCheck>
                                     </Binding.ValidationRules>
@@ -216,7 +234,7 @@
                     </StackPanel>-->
 
                     <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Content="新增" Margin="20,10,10,10" Click="Add_Click"></Button>
+                        <Button Content="新增" Margin="20,10,10,10" Click="Add_Click" Name="SaveData"></Button>
                         <Button Content="清除" Margin="10"></Button>
                         <Button Content="離開" Margin="10" Name="Exit" Click="Exit_Click"></Button>
                         

@@ -21,6 +21,14 @@ namespace BankLibrary.Services
             var settings = new SettingsService(ConfigurationManager.ConnectionStrings["JlizBank"].ConnectionString);
             switch (CheckType)
             {
+                case "NameType":
+                    if (Regex.IsMatch(value.ToString(), @"^.{2,}$") == false)
+                    {
+                        ErrorMessage = "至少輸入2個字元以上!!";
+                        return new ValidationResult(false, ErrorMessage);
+                    }
+                    break;
+
                 case "IdentityType":
                     if (Regex.IsMatch(value.ToString(), @"^[A-Z]{1}[12]{1}\d{8}$")==false)
                     {
@@ -28,6 +36,8 @@ namespace BankLibrary.Services
                         return new ValidationResult(false, ErrorMessage);
                     }
                     break;
+
+            
 
                 case "MobileType":
                     if (Regex.IsMatch(value.ToString(), @"^09\d{8}$")==false)

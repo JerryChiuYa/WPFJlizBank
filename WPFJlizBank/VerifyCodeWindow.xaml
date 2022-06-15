@@ -120,6 +120,7 @@
 
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Button Content="確認此筆轉帳交易" Click="Confirm_Click"></Button>
+                        <Button Content="返回至我的主頁" Click="Home_Click"></Button>
                     </StackPanel>
 
 

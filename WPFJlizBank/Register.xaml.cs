@@ -27,6 +27,7 @@ namespace WPFJlizBank
         private string _dbConnStr= ConfigurationManager.ConnectionStrings["JlizBank"].ConnectionString;
         private BankPersonalInfo personalInfo { get; set; }
         private BankAccount bankInfo { get; set; }
+        private int _coountError = 0;
         public Register()
         {
             InitializeComponent();
@@ -42,6 +43,7 @@ namespace WPFJlizBank
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
+          
             if (bankInfo.BankName == "-----請選擇分行-----" || string.IsNullOrEmpty(bankInfo.BankName))
             {
                 MessageBox.Show("請選擇分行!!");
@@ -68,7 +70,7 @@ namespace WPFJlizBank
             {
                 bankInfo.BankId = item.BankId;
             }
-          
+         
 
             var personalObj=settingsService.AddPersonalData(personalInfo);
             settingsService.AddBankData(bankInfo, personalObj);
@@ -117,6 +119,19 @@ namespace WPFJlizBank
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Check_Error(object sender, ValidationErrorEventArgs e)
+        {
+            if (e.Action==ValidationErrorEventAction.Added)
+            {
+                _coountError++;
+            }
+            else
+            {
+                _coountError--;
+            }
+            this.SaveData.IsEnabled = _coountError > 0 ? false : true;
         }
     }
 }
