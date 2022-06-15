@@ -6,7 +6,11 @@ Here, you can create your own account to transfer money, view the balance, trans
 <p></p>
 <img src="/ImgForIntro/Welcome.png"/>
 
+<p></p>
+
+<iFrame src="/ImgForIntro/WPF.gif" width="50%" height="50%"/>
 <hr>
+
 
 
 ### Built with
