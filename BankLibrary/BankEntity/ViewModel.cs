@@ -40,6 +40,15 @@ namespace BankLibrary.BankEntity
 
             return data;
         }
+        //public ObservableCollection<TransactionRecordsDetails> GetAllTransactionList()
+        //{
+
+        //    var data = new ObservableCollection<TransactionRecordsDetails>();
+        //    var services = new CustomerServices(ConfigurationManager.ConnectionStrings["JlizBank"].ConnectionString);
+        //    data = services.GetAllTransaction(this.AccountNum);
+
+        //    return data;
+        //}
     }
 
     public class TransactionRecordsDetails

@@ -1,16 +1,16 @@
-﻿<Window x:Class="WPFJlizBank.TransferMoneyWindow"
+﻿<Window x:Class="WPFJlizBank.TransactionResult"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFJlizBank"
         mc:Ignorable="d"
-        Title="TransferMoneyWindow" Height="500" Width="800"  MinHeight="500" MinWidth="800"
+        Title="TransactionResult" Height="500" Width="800"  MinHeight="500" MinWidth="800"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
 
         <Style TargetType="Label">
-            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
 
@@ -28,7 +28,7 @@
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="Width" Value="150"></Setter>
+            <Setter Property="Width" Value="120"></Setter>
             <Setter Property="Height" Value="20"></Setter>
             <Setter Property="FontSize" Value="16"></Setter>
             <Setter Property="Background" Value="White"></Setter>
@@ -75,14 +75,14 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Margin="10">
-                <TextBlock Text="新台幣轉帳" FontSize="30" HorizontalAlignment="Center" Margin="0 10" FontWeight="ExtraBlack" Foreground="#006030"></TextBlock>
+                <TextBlock Text="轉帳成功" FontSize="30" HorizontalAlignment="Center" Margin="0 10" FontWeight="ExtraBlack" Foreground="#006030"></TextBlock>
             </StackPanel>
 
-            <Border Grid.Row="1" Background="#4EFEB3" CornerRadius="20" Width="500" Height="380" Margin="5">
-                <StackPanel Name="YourAccount" >
+            <Border Grid.Row="1" Background="#4EFEB3" CornerRadius="20" Width="500" Height="400" Margin="5">
+                <StackPanel Name="Results" >
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Label Content="您的銀行名稱為:"></Label>
-                        <TextBlock Text="{Binding Path=BankName}" Style="{StaticResource infoText}"></TextBlock>
+                        <TextBlock Text="{Binding Path=FromBankName}" Style="{StaticResource infoText}"></TextBlock>
                     </StackPanel>
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Label Content="您的帳戶號碼為:"></Label>
@@ -95,39 +95,32 @@
 
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Label Content="轉帳銀行為:"></Label>
-                        <ComboBox Margin="5" Width="190" Height="25" Name="BankList" SelectionChanged="BankList_SelectionChanged" SelectedValuePath="Content" FontSize="14">
-                            <ComboBoxItem >-----請選擇分行-----</ComboBoxItem>
-                            <ComboBoxItem >傑力士台北分行</ComboBoxItem>
-                            <ComboBoxItem >傑力士淡水分行</ComboBoxItem>
-                            <ComboBoxItem  >傑力士新竹分行</ComboBoxItem>
-                            <ComboBoxItem  >傑力士夏威夷分行</ComboBoxItem>
-                            <ComboBoxItem  >傑力士沖繩分行</ComboBoxItem>
-                        </ComboBox>
+                        <TextBlock Name="ToBankName" Style="{StaticResource infoText}"></TextBlock>
                     </StackPanel>
 
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Label Content="轉帳至帳號為:"></Label>
-                        <TextBox  Name="ToAccountNum"></TextBox>
+                        <TextBlock  Name="ToAccountNum" Style="{StaticResource infoText}"></TextBlock>
                     </StackPanel>
 
                     <StackPanel Margin="5" Orientation="Horizontal">
-                        <Label Content="需轉帳金額為:"></Label>
-                        <TextBox  Name="TransactionMoney"></TextBox>
+                        <Label Content="需轉帳金額為:" ></Label>
+                        <TextBlock Style="{StaticResource infoText}" Text="{Binding TransactionMoney}"></TextBlock>
                     </StackPanel>
 
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Label Content="交易註明:"></Label>
-                        <TextBox  Name="Remark" MaxLength="30" TextWrapping="Wrap" Height="50" Width="200"></TextBox>
-                    </StackPanel>
-                    
-                    <StackPanel Margin="10" Orientation="Horizontal">
-                        <Button Content="發送驗證碼至我的Email" Click="Transfer_Click"></Button>
+                        <TextBlock Text="{Binding Remark}"  TextWrapping="Wrap" Height="50" Width="200" Style="{StaticResource infoText}"></TextBlock>
                     </StackPanel>
 
-            
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <Button Content="返回至我的主頁" Click="Home_Click"></Button>
+                    </StackPanel>
+  
+
+
                 </StackPanel>
             </Border>
         </Grid>
     </StackPanel>
 </Window>
-

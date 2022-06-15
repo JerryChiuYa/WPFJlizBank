@@ -36,7 +36,6 @@ C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\bin\Debug\System.Memory.dll
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\bin\Debug\System.Buffers.dll
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\bin\Debug\System.Reactive.xml
-C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\WPFJlizBank.exe.config
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\Animations.baml
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\App.baml
 C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\LoginWindow.g.cs
@@ -106,3 +105,9 @@ C:\Users\jerry\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\BalanceWindow.g.cs
 C:\Users\jerry\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\BalanceWindow.baml
 C:\Users\jerry\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\TransferMoneyWindow.g.cs
 C:\Users\jerry\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\TransferMoneyWindow.baml
+C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\TransactionResult.g.cs
+C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\TransferMoneyWindow.g.cs
+C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\VerifyCodeWindow.g.cs
+C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\TransactionResult.baml
+C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\TransferMoneyWindow.baml
+C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\VerifyCodeWindow.baml

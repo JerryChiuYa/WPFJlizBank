@@ -22,12 +22,10 @@ namespace WPFJlizBank
     /// </summary>
     public partial class HomeWindow : Window
     {
-        private ObservableCollection<BankPersonalInfo> _allAccounts;
         private BankPersonalInfo _currentAccount;
-        public HomeWindow(ObservableCollection<BankPersonalInfo> allAccounts, BankPersonalInfo currentAccount)
+        public HomeWindow(BankPersonalInfo currentAccount)
         {
             InitializeComponent();
-            _allAccounts = allAccounts;
             _currentAccount = currentAccount;
         }
 

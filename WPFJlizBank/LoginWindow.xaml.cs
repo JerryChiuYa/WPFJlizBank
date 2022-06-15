@@ -33,14 +33,13 @@ namespace WPFJlizBank
         private void Login_Click(object sender, RoutedEventArgs e)
         {
 
-            var loginService = new LoginService(_dbConnStr);
-            var result = loginService.VerifyUser(this.userName.Text, this.password.Password);
+            var services = new CustomerServices(_dbConnStr);
+            var result = services.VerifyUser(this.userName.Text, this.password.Password);
 
             if (result)
             {
-                var allAccounts = new CustomerServices(_dbConnStr).GetAllAccountsInfo(this.userName.Text);
                 var currentAccount = new CustomerServices(_dbConnStr).GetCurrentAccountInfo(this.userName.Text);
-                var homeWindow = new HomeWindow(allAccounts, currentAccount);
+                var homeWindow = new HomeWindow(currentAccount);
                 homeWindow.Show();
                 this.Close();
             }
