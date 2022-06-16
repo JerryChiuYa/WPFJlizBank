@@ -230,7 +230,7 @@ private int _coountError;
 <ul>
 
 <li>Modify Personal Information</li>
-<img src="/ImgForIntro/register.png"/>
+<img src="/ImgForIntro/modify.png"/>
 
 
 </ul>
