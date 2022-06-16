@@ -297,9 +297,8 @@ namespace BankLibrary.Services
 
                 
                 //增加付款人紀錄
-                    var randNum = Guid.NewGuid();
                     var cmd = new SqlCommand(insertSql, conn);
-                    cmd.Parameters.AddWithValue("@TransactionNum", randNum);
+                    cmd.Parameters.AddWithValue("@TransactionNum", Guid.NewGuid());
                     cmd.Parameters.AddWithValue("@TransactionTime", currentTime);
                     cmd.Parameters.AddWithValue("@FromAccountNum", bankInfo.AccountNum);
                     cmd.Parameters.AddWithValue("@ToAccountNum", transaction.ToAccountNum);
@@ -343,7 +342,7 @@ namespace BankLibrary.Services
 
                 //增加收款人紀錄
                 var cmd2 = new SqlCommand(insertSql, conn);
-                cmd2.Parameters.AddWithValue("@TransactionNum", randNum);
+                cmd2.Parameters.AddWithValue("@TransactionNum", Guid.NewGuid());
                 cmd2.Parameters.AddWithValue("@TransactionTime", currentTime);
                 cmd2.Parameters.AddWithValue("@FromAccountNum", bankInfo.AccountNum);
                 cmd2.Parameters.AddWithValue("@ToAccountNum", transaction.ToAccountNum);

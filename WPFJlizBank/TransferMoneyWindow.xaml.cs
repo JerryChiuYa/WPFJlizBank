@@ -73,8 +73,8 @@ namespace WPFJlizBank
             _transactionRecordsDetails.ToBankName= this.BankList.SelectedValue.ToString();
             _transactionRecordsDetails.Remark = this.Remark.Text;
 
-            var verifyCode = "123";
-            //var verifyCode = GetCodeViaEmail.GetVerifyCode(_currentAccount.Email);
+            //var verifyCode = "123";
+            var verifyCode = GetCodeViaEmail.GetVerifyCode(_currentAccount.Email);
             this.Close();
             var window = new VerifyCodeWindow(_currentAccount, _transactionRecordsDetails, verifyCode);
             window.ShowDialog();
