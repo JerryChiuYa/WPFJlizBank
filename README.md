@@ -8,7 +8,7 @@ Here, you can create your own account to transfer money, view the balance, trans
 
 <p></p>
 
-<img src="/ImgForIntro/WPF.gif" width="70%" height="70%"/>
+<img src="/ImgForIntro/WPF.gif"/>
 <hr>
 
 
