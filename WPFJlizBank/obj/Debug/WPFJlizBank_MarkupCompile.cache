@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\jerry\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\
+C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\obj\Debug\
 WPFJlizBank
 none
 false
 DEBUG;TRACE
-C:\Users\jerry\source\repos\WPFJlizBank\WPFJlizBank\App.xaml
+C:\Users\USER\source\repos\WPFJlizBank\WPFJlizBank\App.xaml
 18490886307
 
 21-1263678462
-22-1782346895
+21-1452803987
 Animations.xaml;BalanceWindow.xaml;CustomerPersonalWindow.xaml;CustomerTransaction.xaml;CustomerWindow.xaml;ForgetPassword.xaml;ForgetPasswordPage3.xaml;ForgetPasswordPage2.xaml;ForgetPasswordPage1.xaml;LoginWindow.xaml;ModifyPersonalInfo.xaml;Register.xaml;HomeWindow.xaml;MainWindow.xaml;SettingsWindow.xaml;TransactionResult.xaml;TransferMoneyWindow.xaml;VerifyCodeWindow.xaml;
 
 False
