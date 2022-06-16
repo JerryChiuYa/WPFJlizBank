@@ -226,6 +226,50 @@ private int _coountError;
 
 <hr>
 
+### 3.Add Animation
+<ul>
+<li>As we already installed the Nuget-XamlFlair, Add a ResourceDictionary to our WPF Project.</li>
+</ul>
+
+```Xml
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:cor="clr-namespace:System;assembly=mscorlib"
+					xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF">
+
+    <cor:Double x:Key="BlurRadius">24</cor:Double>
+    <cor:Double x:Key="SmallScaleFactor">0.75</cor:Double>
+    <cor:Double x:Key="LargeScaleFactor">1.25</cor:Double>
+    <xf:Offset x:Key="PositiveOffset"
+			   OffsetValue="50" />
+    <xf:Offset x:Key="NegativeOffset"
+			   OffsetValue="-50" />
+
+    <!-- ========================================================== -->
+    <!-- ================== SIMPLE ANIMATIONS ===================== -->
+    <!-- ========================================================== -->
+
+    <xf:AnimationSettings x:Key="FadeIn"
+						  Kind="FadeFrom"
+						  Opacity="0" />
+
+    <xf:AnimationSettings x:Key="FadeOut"
+						  Kind="FadeTo"
+						  Opacity="0" />
+    <!-- Only list some codes here -->
+</ResourceDictionary>
+```
+
+<ul>
+<li>Once we want to use the animation, import the namespace and call the animation by StaticResource</li>
+</ul>
+
+```
+xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+
+<Image Grid.Row="1" Source="/Images/Ewallet.png" xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeInAndGrow}, Delay=200}" ></Image>
+```
+
 ### Other functions
 <ul>
 
